@@ -1,0 +1,36 @@
+
+#jigsaw-menu {
+    width: 1024px;
+    height: 680px;
+    text-align: center;
+}
+#jigsaw-menu .jig {
+    width: 250px;
+    margin: 0px 35px 10px 35px;
+}
+#jigsaw-menu p {
+    margin:0;
+    font-family: "Comic Sans MS", MarkerFelt-Thin, sans-serif;
+    font-size: 50px;
+}
+#puzzle {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    color:blue;
+    font-weight: 400;
+}
+
+#container {
+    border:solid 1px #ccc;
+    margin-top: 0px;
+    width:1024px;
+    height: 680px;
+    display:none;
+}
+
+
+#background {
+    position:absolute;
+    opacity: 0.7;
+    display:none;
+}

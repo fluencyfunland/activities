@@ -1,0 +1,230 @@
+
+
+#theme-menu, #custom-menu {
+    width: 1024px;
+    height: 680px;
+    text-align: center;
+}
+
+#theme-menu img {
+    height: 125px;
+    width: auto;
+    margin: 33px 60px 0 40px ;
+}
+#image-div {
+    position: absolute;
+    top: 50px;
+    left: 110px;
+}
+#image-div img {
+    max-width: 804px;
+    height: 560px;
+    width: 804px;
+    display: none;
+    text-align: center;
+}
+
+#container {
+    width: 804px;
+    height: 560px;
+    position: absolute;
+    top: 60px;
+    left: 110px;
+    display: none;
+}
+#custom-menu {
+    display: none;
+}
+
+#flickr-input {
+    display: block;
+    width: 1024px;
+}
+
+#flickr-sets {
+    margin-top: 50px;
+    display: inline-block;
+    width: 1024px;
+}
+
+#custom-menu input {
+    display: inline-block;
+    margin-top: 50px;
+    font-size: 14px;
+}
+.custom-item  {
+    width: 150px;
+    height: 100px;
+    border: 1px solid grey;
+    text-align: center;
+    display: inline-block;
+    margin: 40px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.custom-item h3 {
+    display: inline-block;
+    font-size: 22px;
+    margin-top: 20px;
+    height: 100px;
+    vertical-align: middle;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+.customImage {
+    display: none;
+    height: auto !important;
+    margin: 0 auto;
+}
+
+
+
+.photosets {
+    float:right;
+    clear:both;
+}
+.photosets a {
+    width: 100px;
+}
+#themes a {
+    padding: 10px;
+    min-width: 40px;
+    font-size: 1.2em;
+}
+#themes a:hover {
+    background-color: #FF9999;
+}
+.selected {
+    background-color: #FF6699;
+}
+
+#col1, #col2 {
+    width: 110px;
+    height: 560px;
+    margin-top: 40px;
+}
+#col1 {
+    float: left;
+}
+#col2 {
+    float: right;
+}
+
+#col1 img, #col2 img {
+    width: 90px;
+    margin-left: 10px;
+}
+
+.image_bg {
+    /* -- CSS3 - add a drop shadow -- */
+    -webkit-box-shadow: 0 0 15px 5px #fff;
+    -moz-box-shadow: 0 0 15px 5px #fff;
+    box-shadow: 0 0 15px 5px #fff;
+}
+.image_bg {
+    margin-top: 3em;
+    width: 804px;
+    height:560px;
+    float:left;
+}
+
+
+.sprite {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.customThumb {
+    margin-top: 20px;
+}
+
+#showTextMsg1, #showTextMsg2 {
+    position: absolute;
+    display: none;
+    color: navy;
+    left: 120px;
+}
+
+input {
+    font-size: 1.2em !important;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 7.5px;
+    text-align: center;
+}
+#custom-menu p {
+    display:inline;
+    font-size: 1em;
+    font-weight: bold;
+    color: blue;
+}
+
+
+
+#flickr-instr {
+    color: #303233;
+}
+#flickr-instr p {
+    font-size: 1.3em;
+    text-align: center;
+    padding: 0 0 0 0;
+    display: block;
+    color: #303233;
+}
+
+#showInstr {
+    position: absolute;
+    top: 190px;
+    left:420px;
+    font-size: 0.8em !important; 
+    color: white !important;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+#flickr-icon {
+    height: 50px;
+    margin-top: 25px;
+}
+
+#submit, #showInstr {
+    background: rgb(0, 29, 229);
+    background: -moz-linear-gradient(90deg, rgb(0, 29, 229) 0%, rgb(90, 140, 250) 70%);
+    background: -webkit-linear-gradient(90deg, rgb(0, 29, 229) 0%, rgb(90, 140, 250) 70%);
+    background: -o-linear-gradient(90deg, rgb(0, 29, 229) 0%, rgb(90, 140, 250) 70%);
+    background: -ms-linear-gradient(90deg, rgb(0, 29, 229) 0%, rgb(90, 140, 250) 70%);
+    background: linear-gradient(180deg, rgb(0, 29, 229) 0%, rgb(90, 140, 250) 70%);
+    margin-left: 10px;
+    background-color: #E6F3FF;
+    color: white;
+}
+#submit:hover, #showInstr:hover  {
+    opacity: 0.8;
+    cursor: pointer;
+}
+#flickrId {
+    border: 3px solid blue;
+    background-color: #E6F3FF;
+    border-radius: 10px;
+}
+
+.flickr-steps {
+    display: inline-block;
+    margin-top: 0px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+

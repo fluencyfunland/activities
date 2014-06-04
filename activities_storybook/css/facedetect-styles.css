@@ -1,0 +1,296 @@
+
+
+#content{
+    width: 980px;
+    height: 680px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+#content h1 {
+    font-size: 5em;
+    color: purple;
+    margin-bottom: 20px;
+}
+#content h2 {
+    font-size: 2em;
+    color: blue;
+    margin-top: 0;
+}
+
+input {
+    font-family: "Comic Sans MS", MarkerFelt-Thin, sans-serif;
+}
+
+#myPicture{
+    cursor: pointer;
+    float:left;
+}
+#face-rect {
+    cursor: move;
+}
+#picImage {
+    width: 300px;
+    height: 500px;
+}
+#upload {
+    float:left;
+    clear: both;
+    margin: 50px;
+    width: 300px;
+    height: 300px;
+}
+
+#imageThumbs {
+    margin: 20px 0px 0px 0px;
+    width: 350px;
+    height: 150px;
+    overflow-y: auto;
+    text-align: left;
+}
+#imageThumbs img {
+    max-height: 50px;
+    width: auto;
+    cursor: pointer;
+}
+.thumb {
+    display: inline-block;
+}
+.trash{
+    height: 50px;
+}
+#imageThumbs .nav {
+    width: auto;
+    display: inline-block;
+    margin: 5px;
+}
+
+#delete-msg {
+    text-align: left;
+    height: 80px;
+}
+#delete-msg p {
+    display: inline;
+}
+
+#ovalContainer {
+    position: absolute;
+    top: 200px;
+    left: 800px;
+    height: 200px;
+    width: 80px;
+}
+
+#picImage {
+    float: left;
+    position:relative;
+    margin: 50px;
+    width: 300px;
+    height: 300px;
+}
+#picImage img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+#face-msg {
+    position: absolute;
+    top: -50px;
+    padding:0;
+    border-radius: 5px;
+    font-size: 1.2em;
+    color:blue;
+}
+
+#face-rect {
+    position: absolute;
+    z-index:999;
+    border: outset 0px darkslategrey;
+    background: url(../img/oval.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.8;
+}
+
+#rectContainer {
+    display: none;
+}
+.create {
+    width: 980px;
+    height: 620px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+#write-name {
+    height: 100px;
+    width: 400px;
+    margin: 20px auto;
+    position: relative;
+}
+#character {
+    float: left;
+    clear: both;
+    width: 980px;
+    display:none;
+}
+#body-image {
+    height: 200px;
+    width: 300px;
+    float: left;
+    margin: 20px 20px;
+    position: relative;
+}
+
+#cap, #hair {
+    left: 410px;
+    width: 470px;
+    margin-right: 60px;
+    position: relative;
+    position: absolute;
+    display:none;
+}
+#cap {
+    top: 310px;
+}
+#hair {
+    top: 210px;
+}
+
+#write-name input {
+    margin:0;
+    width: 350px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: blue;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    text-align: center;
+}
+#choose2 {
+    position: relative;
+}
+
+#body-image img {
+    height: 150px;
+}
+
+#cap img, #hair img {
+    max-width: 80px;
+    max-height: 40px;
+    height: auto;
+    margin: auto 0 auto 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+#body-image img, #cap img, #hair img  {
+    border: 2px solid transparent;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.complete {
+    position: absolute;
+    height: 30px !important;
+    opacity: 1.0 !important;
+
+}
+#write-name .complete {
+    left: 400px;
+    top: 10px;
+}
+#body-image .complete {
+    left: 320px;
+    top: 100px;
+}
+
+#cap .complete, #hair .complete {
+    left: 450px;
+}
+
+#imageContainer {
+    float: left;
+    margin-left: 70px;
+    width: 350px;
+    height: 400px;
+}
+#createContainer {
+    display: none;
+}
+
+#book-menu {
+    width: 500px;
+    height: 450px;
+    float: left;
+}
+#book-menu .nav {
+    display: inline-block;
+    text-align: center;
+    margin: 20px;
+    height: 175px;
+    width: 240px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#title-small {
+    font-size: 34px;
+    margin-top: 0;
+}
+
+#subTitle-small {
+    font-size: 28px;
+    margin-top: 0;
+}
+
+.fwd, .back {
+    position: absolute;
+    height: 80px;
+    top: 450px;
+    opacity: 1.0;
+}
+.back {
+    left: 20px;
+}
+.fwd {
+    left: 840px;
+    display:none;
+}
+.fwd:hover, .back:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+#choose2, #choose3 {
+    display: none;
+}
+
+#back-story {
+    top: 600px;
+    height: 80px;
+    width: auto;
+}
+
+#container {
+    width: 820px;
+    height: 620px;
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    z-index: 999;
+    display: none;
+}
+
+.ui-icon-closethick {
+    left: 0 !important;
+    top: 0 !important;  
+}
+
+.highlight {
+    background-color:#FFFFE0;
+    border-radius: 10px;
+}
+
+
+

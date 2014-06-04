@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="template">
+        <name>activities_storybook</name>
+        <creationDate>09-05-2014</creationDate>
+        <author>Mark Wigglesworth</author>
+        <authorEmail>markwigg@live.com</authorEmail>
+        <copyright>Markw Wigglesworth 2014</copyright>
+        <license>GNU/GPL</license>
+        <version>1.0</version>
+        <description>Story Book</description>
+        <files>
+                <filename>index.php</filename>
+                <filename>templateDetails.xml</filename>
+                
+                <folder>css</folder>
+                <folder>fonts</folder>
+                <folder>img</folder>
+                <folder>js</folder>
+                <folder>sounds</folder>
+                
+        </files>
+        <positions>
+                <position>breadcrumb</position>
+                <position>left</position>
+                <position>right</position>
+                <position>top</position>
+                <position>user1</position>
+                <position>user2</position>
+                <position>user3</position>
+                <position>user4</position>
+                <position>footer</position>
+        </positions>
+</extension>

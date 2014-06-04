@@ -1,0 +1,89 @@
+
+#dark-bg {
+    position:absolute;
+    left: 0;
+    top: 0;
+    height: 680px;
+    width: 1024px;
+    background-color: black;
+    display: none;
+}
+#redx {
+    position: absolute;
+    top: 630px;
+    left: 960px;   
+}
+
+#intro {
+    width: 1024px;
+    height: 680px;
+    text-align: center;
+}
+
+#hotspots-menu {
+    width: 1024px;
+    height: 680px;
+    text-align: center;
+}
+
+#choose {
+    margin: 0;
+    padding-top:80px;
+    padding-bottom: 60px;
+    font-size: 70px;
+    font-weight: bold;
+    font-stretch: expanded;
+    color: purple;
+}
+
+.menu-item {
+    display: inline-block;
+}
+.menu-item p {
+    font-size: 40px;
+    color: blue;
+    margin: 0;
+}
+
+.background {
+    margin-top: 0px;
+    width:1024px;
+    height: 100%;
+    display: none;
+}
+
+#hotspots-layout {
+    width: 1024px;
+    height: 680px;
+    text-align: center;
+    position: relative;
+}
+.objects {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+}
+.objects img {
+    height: 100%;
+}
+.objGlow {
+    display: none;
+}
+.objects:hover {
+    cursor: pointer;
+}
+
+#container {
+    top: 60px;
+    left:0;
+    width:1024px;
+    height: 680px;
+    position: absolute;
+    z-index: 999;
+    display:none;
+}
+.nav {
+    margin: 20px;
+}
+
+
