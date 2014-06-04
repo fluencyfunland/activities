@@ -37,6 +37,7 @@ class Activity {
         echo "<html lang='en' xmlns='xmlns='ww.w3.org/1999/xhtml'>";
         echo "<head>";
         echo "<meta charset='utf-8'/>";
+        echo "<link rel='shortcut icon' href='{$this->baseUrl}activities/img/favicon.ico'>";
         echo "<title>{$this->title}</title>";
 
         //Add main stylesheet
