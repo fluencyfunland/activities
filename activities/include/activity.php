@@ -41,7 +41,7 @@ class Activity {
         echo "<title>{$this->title}</title>";
 
         //Add main stylesheet
-        echo "<link rel='stylesheet' href= '{$this->baseUrl}activities/css/main-styles.css'/>";
+        echo "<link rel='stylesheet' href= '{$this->baseUrl}activities/css/activity-styles.css'/>";
 
         //Add local stylesheet/s
         foreach ($cssLocalFiles as $cssFile) {
