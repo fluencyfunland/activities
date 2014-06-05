@@ -18,7 +18,7 @@ $activity->writeGlobalPngImg("back", NULL, "back", "back to Words and Pictures M
         </a><br>
         <input id="flickrId" type="text" placeholder="flickr user id" name="flickr-id" size="14"/>
         <input id="submit" type="submit" name="submit-flickr" onmousedown = "displayCustomSets()" value="Get Photo Albums"/>
-        <br><p>learn how to find your flickr user id&nbsp;<a href="http://idgettr.com" target="_blank">here</a></p>
+        <br><p>learn how to find your&nbsp; <a href="http://idgettr.com" target="_blank">flickr user id</a></p>
     </div>
 
     <p id="showInstr">show Flickr instructions</p>

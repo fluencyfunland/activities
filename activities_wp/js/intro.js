@@ -68,7 +68,7 @@ function displayThemeMenu() {
 function initThemeNavigation() {
 
     //initialise the wp thumbs event to assign theme and display selected background and sprites
-    $(".nav").mousedown(function(event) {
+    $("#theme-menu .nav, .custom-menu .nav").on("mousedown touchstart", function(event) {
         event.stopPropagation();
         event.preventDefault();
         
