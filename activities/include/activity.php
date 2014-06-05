@@ -7,7 +7,9 @@ class Activity {
     private $baseUrl;
     private $user;
 
-    //Constructor to define the base Url string and the javascript url global
+    /* Constructor to define the base Url string, the javascript url global, and user
+     * Parameters: the name of the activity, and the title appearing in the head
+     */
     function Activity($activityName, $title) {
         $this->name = $activityName;
         $this->title = $title;
@@ -31,6 +33,10 @@ class Activity {
         }
     }
 
+    /* Write the top section of each document, DOCTYPE, html, head, opening body, 
+     * wrapper, and content div tags.
+     * Parameter: an array with the string names of the activity specific css files. 
+     */
     public function writeHtmlTopSection($cssLocalFiles) {
 
         echo "<!DOCTYPE html>";
@@ -54,6 +60,10 @@ class Activity {
         echo "<div id='content'>";
     }
 
+    /* Write the lower half of each document, closing div tags, 
+     * javascript file links, and closing body, and html tags.
+     * Parameter: an array with the string names of the activity specific js files. 
+     */
     public function writeHtmlLowerSection($jsLocalFiles) {
 
         echo "</div>";
@@ -81,6 +91,9 @@ class Activity {
         echo "</html>";
     }
 
+    /* Write html img tags with global src i.e. located in the activities img folder 
+     * Parameters: the id, class, file name, and alt of the image. 
+     */
     public function writeGlobalPngImg($id, $class, $imageName, $alt) {
 
         $idText = $id != NULL ? "id='{$id}'" : "";
@@ -89,6 +102,9 @@ class Activity {
         echo "<img {$idText} {$classText} src='{$this->baseUrl}activities/img/{$imageName}.png' alt='{$alt}'>";
     }
 
+    /* Write html img tags with local src i.e. located in the secific activity img folder 
+     * Parameters: the id, class, file name, and alt of the image. 
+     */
     public function writeLocalPngImg($id, $class, $imageName, $alt) {
 
         $idText = $id != NULL ? "id='{$id}'" : "";
@@ -97,6 +113,8 @@ class Activity {
         echo "<img {$idText} {$classText} src='{$this->baseUrl}{$this->name}/img/{$imageName}.png' alt='{$alt}'>";
     }
 
+    /* Write the html for the two home button links appearing on each activity 
+     */
     public function writeHomeBtnLink() {
 
         $homeUrl = "http://sitevm1.ballarat.edu.au/fluencyfunland/index.php";
@@ -110,6 +128,9 @@ class Activity {
         echo "</a>";
     }
 
+    /* Write the html to declare and assign a global javascript variable
+     * for the user directory (the username)  
+     */
     public function getUserDir() {
         $userDir = $this->user != "" ? "/{$this->user}" : "";
         echo "<script type='text/javascript'>var userDir = '{$userDir}'; </script>";
