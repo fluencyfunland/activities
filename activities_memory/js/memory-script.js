@@ -1,12 +1,5 @@
 
 //globals
-
-var stage = null;
-var imgLayer = null;
-var txtlayer = null;
-var images = {};
-var tweens = {};
-
 var card1 = {//1st selection
     id: null,
     source: null,
@@ -20,25 +13,26 @@ var card2 = {//2nd selection
     y: null
 };
 
-var cards = {}; //all the cards
-var positions = []; //absolute positions for the cards on the layout (unchanged)
-var shuffledPositions = []; //the copied array with the shuffled positions
+
 
 // object to store the packs data
 var packs = {};
 packs.currentPack = {
-    name: null,
-    imgSrc: null,
-    numImgs: null,
-    images: [],
-    background: null,
-    sounds: [],
-    color: null,
-    object: null,
-    coords: null
+    name: null,//(string) name of the pack
+    imgSrc: null,//(string) url of the pack back image
+    numImgs: null, //number of card images in the pack
+    images: null, //an object containing the card images
+    background: null,//background image src to show at on completion
+    sounds: [],//the sound to play on completion
+    color: null,//the color of the pack backgound
+    object: null,//the name of animated object for the completion
 };
 
 packs.currentPack.objCoords = {x: null, y: null};
+
+var cards = {}; //stores the positions of each card in the layout
+var positions = []; //absolute positions for the cards on the layout (unchanged)
+var shuffledPositions = []; //the copied array with the shuffled positions
 
 var animals = {imgName: "animals", imgSrc: docUrl + "objects/animals.png", posX: 1000, posY: 400,
     movX: -100, movY: 0, scale: 1, scaleTo: 1,
@@ -245,8 +239,7 @@ function dealCards() {
     }, 1000);
 
 }
-/*function to run after dealing cards is done
- - show the cards and set up the navigation */
+//function to run after dealing cards is done - show the cards and set up the navigation
 function dealCallback() {
     $(".deck").hide();
     $(".cards").show();
@@ -295,7 +288,6 @@ function createDealingCode(numCrds, dealSpeed) {
     }
     return code;
 }
-
 
 function isFinished() {
     var cards = $("#card-layout").children(".cards:visible");
@@ -353,7 +345,8 @@ function getPacks() {
             packs[idx].sounds = [idx];
             packs[idx].color = packColors[i];
             packs[idx].object = objectImage;
-            //packs[idx].coords = eval(idx + "Obj");
+            
+            console.log(packs[idx].coords);
 
             //draw and save the images and animations
             drawImage(eval(idx));
