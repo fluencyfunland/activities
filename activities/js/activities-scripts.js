@@ -4,6 +4,8 @@
 //GLOBALS
 var imgLayer = null;
 var txtLayer = null;
+var images = {};
+var tweens = {};
 
 //Template of the object passed to the drawImage and createTween functions
 var object = {
