@@ -1,6 +1,5 @@
 
 //globals
-
 var drawColor = "";
 var strokeColor = "black";
 var context = null;
@@ -15,16 +14,16 @@ var stage = null;
 var completed = false;
 
 var drawing = {
-    name: null,
-    x: null,
-    y: null,
-    scale: null,
+    name: null,//the name of the drawing 
+    x: null,//(float)any adjustment to the x coord position (if required)
+    y: null,//(float)any adjustment to the x coord position (if required)
+    scale: null,//(float)any adjustment to the size scale of the image from 1.0
     shapeCount: null, //count of number of shapes
     layerBg: [], //shapes in background - drawn first
     layer2: [], //shapes drawn as per drawColor, but in front
     layer3: [], //shapes to be all black
     layer4: [], //shapes to be all white
-    layer5: [], //shapes to be white, and converted to backgorund color on finish
+    layer5: [], //shapes to be white, and converted to background color on finish
     layer6: [] ////shapes to be all black in front of others
 };
 
@@ -315,8 +314,8 @@ function makeCursor(color) {
     if (drawColor !== "white") {
         document.body.style.cursor = 'url(' + cursor.toDataURL() + '), auto';
     }
-
 }
+
 function initShapeBoolean() {
 
     for (var i = 1; i <= drawing.shapeCount; i++) {
