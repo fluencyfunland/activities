@@ -2,7 +2,6 @@
 
 /*
   script to get the names of the card pack folders, and the images in the directories
- * also calculates the positions coordinate for the cards on the card layout
  */
 
 $path = "../img";

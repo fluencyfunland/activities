@@ -1,16 +1,9 @@
 
-//globals for Kinetic js
-var stage = null;
-var imgLayer = null;
-var txtLayer = null;
-var images = {};
-var tweens = {};
 
-$(function() {
-    initStage();
-    initLayers();
-    displayPosition("#hotspots-layout");
-});
+initStage();
+initLayers();
+
+//displayPosition("#hotspots-layout");
 
 
 function createImages() {
@@ -73,8 +66,8 @@ function initObjects() {
 
 function initSounds() {
 
+    //create the sounds array 
     var sounds = [];
-
     $.each(hotspot.objects, function(idx, object) {
         sounds.push(object.name);
     });
@@ -91,10 +84,10 @@ function tweenCallback(tween, objectName) {
     //show text for the object
     drawText(512, 20, 60, objectName);
     $.ionSound.play(objectName);
-    
+
     //show red x for closing
-    
-    
+
+
     //initiate event to remove large image on click
     $("#container").on("mousedown touchstart", function(event) {
         event.stopPropagation();

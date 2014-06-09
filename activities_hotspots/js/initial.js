@@ -1,12 +1,11 @@
 
 
 var hotspot = {
-    name: null,
-    path: null,
-    objects: {},
-    positions: []
+    name: null,//(string)the name of the pack
+    path: null,//(string) the url path to the pack directory
+    objects: {},//the objects to be displayed on the canvas
+    positions: []//(array of floats) coords on the canvas for displaying objects
 };
-
 
 var farm = {name: "farm", path: docUrl + "img/farm/"};
 
@@ -179,9 +178,6 @@ function initPageNavigation() {
 
         imgLayer.remove();
         imgLayer.draw();
-
-        initStage();
-        initLayers();
 
         initPositions();
         drawObjects();
