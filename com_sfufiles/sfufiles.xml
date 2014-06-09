@@ -4,9 +4,9 @@
         <name>SFU Files</name>
         <!-- The following elements are optional and free of formatting constraints -->
         <creationDate>May 2014</creationDate>
-        <author>Mark Wigglesworth</author>
-        <authorEmail>markwigg@live.com</authorEmail>
-        <authorUrl>http://www.example.org</authorUrl>
+       <author>Mark Wigglesworth</author>
+        <authorEmail>m.wigglesworth@connect.qut.edu.au</authorEmail>
+        <copyright>Mark Wigglesworth 2014</copyright>
         <copyright>Copyright Info</copyright>
         <license>License Info</license>
         <!--  The version string is recorded in the components table -->
