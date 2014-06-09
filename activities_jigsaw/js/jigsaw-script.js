@@ -19,7 +19,15 @@ var widthContainer;
 var heightContainer;
 
 //jigsaw object template
-var jigsaw = {name: "", numPieces: 0, numCols: 0, numRows: 0, widthImg: 0, heightImg: 0, sounds: []};
+var jigsaw = {
+    name: null, //(string) the name of the jigsaw
+    numPieces: null, //(integer) the number of pieces
+    numCols: null, //(integer) the number of columns in the grid 
+    numRows: null, //(integer) the number of rows in the grid 
+    widthImg: null, //(integer) the width of the piece
+    heightImg: null, //(integer) the height if the piece
+    sounds: []
+};
 
 //the data for the jigsaws
 var jig1 = {name: "jig1", numPieces: 6, numCols: 3, numRows: 2, widthImg: 200, heightImg: 236, sounds: ["sheep"]};
@@ -28,19 +36,11 @@ var jig3 = {name: "jig3", numPieces: 6, numCols: 3, numRows: 2, widthImg: 200, h
 var jig4 = {name: "jig4", numPieces: 9, numCols: 3, numRows: 3, widthImg: 200, heightImg: 158, sounds: ["seagull"]};
 var jig5 = {name: "jig5", numPieces: 9, numCols: 3, numRows: 3, widthImg: 200, heightImg: 158, sounds: ["monkeys"]};
 
-//completion messages - shown randomly
-var messages = ["well done", "you did it", "all finished", "awesome job", "too cool", "excellent"];
 
-/**Function: runs when page loads
- */
-$(function() {
 
-    initNavigation();
+initNavigation();
 
-    /* some functions if we need to test anything */
-    //displayPosition(); 
-    //getgetLayerInfo()
-});
+
 
 function initNavigation() {
 
@@ -123,7 +123,7 @@ function createGrid() {
         if (i < jigsaw.numCols) {//row1
             ptX = origin.x + (jigsaw.widthImg * i);
             ptY = origin.y + (jigsaw.heightImg * 0);
-            boxes[i] = kRect(ptX, ptY, jigsaw.widthImg, jigsaw.heightImg, "lightgrey", strokeWidth, bgLayer);
+            boxes[i] = createKinrect(ptX, ptY, jigsaw.widthImg, jigsaw.heightImg, "lightgrey", strokeWidth, bgLayer);
         } else {//row2 & 3
 
             ptX = origin.x + (jigsaw.widthImg * (i % jigsaw.numCols));
@@ -133,11 +133,12 @@ function createGrid() {
             if (jigsaw.numPieces > 6 && i > 5) {
                 ptY = origin.y + (jigsaw.heightImg * 2);
             }
-            boxes[i] = kRect(ptX, ptY, jigsaw.widthImg, jigsaw.heightImg, "lightgrey", strokeWidth, bgLayer);
+            boxes[i] = createKinrect(ptX, ptY, jigsaw.widthImg, jigsaw.heightImg, "lightgrey", strokeWidth, bgLayer);
         }
         boxes[i].coords = {left: ptX, right: ptX + jigsaw.widthImg, top: ptY, bottom: ptY + jigsaw.heightImg};
         boxes[i].pieceId = i;
     }
+    console.log(boxes);
 }
 
 function displayPieces() {
@@ -272,9 +273,11 @@ function isClose(piece) {
     return false;
 }
 
+
+
 /**Function to assign the closest destination area, calculated by comparing the 
- * dragged shape position (center) with the coordinates
- * @param {drag object} dragShape
+ * dragged shape position (center) with the coordinates 
+ * @param {object} dragObj
  * @returns void
  */
 function isCenterInBox(dragObj) {
@@ -289,10 +292,11 @@ function isCenterInBox(dragObj) {
     }
 }
 
+/* Function to call on jigsaw completion from isFinished()
+ * to play a sound and draw a text message on the canvas
+ * @returns void
+ */
 function celebrate() {
-
-    for (var i = 0; i < jigsaw.numPieces; i++) {
-    }
     pceLayer.draw();
     $.ionSound.play(jigsaw.sounds[0]);
     var message = messages[Math.floor((Math.random() * 6))];
@@ -313,7 +317,7 @@ function isFinished() {
 
 
 // build the specified KineticJS Rectangle and add it to the stage
-function kRect(x, y, width, height, stroke, strokewidth, layer) {
+function createKinrect(x, y, width, height, stroke, strokewidth, layer) {
     var rect = new Kinetic.Rect({
         x: x,
         y: y,
@@ -352,7 +356,7 @@ function createImagePieces(posX, posY, pieceId, source) {
             height: jigsaw.heightImg,
             draggable: true,
             stroke: "black",
-            strokeWidth: 3,
+            strokeWidth: 3
         });
         pceLayer.add(image);
         stage.add(pceLayer);
