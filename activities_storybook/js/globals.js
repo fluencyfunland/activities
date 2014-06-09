@@ -1,7 +1,5 @@
 
 var coords = {};
-var images = {};
-var tweens = {};
 var charName = null;
 var gender = null;
 var cap = null;
@@ -10,10 +8,14 @@ var faceUrl = null;
 var body = {name: null, posX: null, posY: null, bodyImg: null};
 //THE BODY IMAGES
 girls = {};
+
 girls.girlIntro = {name: "girlIntro", posX: 34, posY: 93, bodyImg: docUrl + "img/girl_intro.png"};
 girls.girlCar = {name: "girlCar", posX: -30, posY: 90, bodyImg: docUrl + "img/girl_car.png"};
 girls.girlBike = {name: "girlBike", posX: 15, posY: 96, bodyImg: docUrl + "img/girl_bike.png"};
-girls.girlBeach = {name: "girlBeach", posX: 15, posY: 78, bodyImg: docUrl + "img/girl_beach.png"};
+
+girls.girlBeach = {name: "girlBeach", posX: 15, posY: 78, 
+    bodyImg: docUrl + "img/girl_beach.png"};
+
 girls.girlSand = {name: "girlSand", posX: 13, posY: 77, bodyImg: docUrl + "img/girl_sand.png"};
 girls.girlSoccer = {name: "girlSoccer", posX: 0, posY: 93, bodyImg: docUrl + "img/girl_soccer.png"};
 girls.girlFarm = {name: "girlFarm", posX: 35, posY: 93, bodyImg: docUrl + "img/girl_farm.png"};
@@ -86,10 +88,13 @@ subjects.sandKid = {imgName: "sandKid", imgSrc: null, posX: 300, posY: 250,
     movX: 0, movY: 0, scale: 0.85, scaleTo: 0.9,
     duration: 2, easing: "Linear", sound: null, callback: function() {
     }};
-subjects.soccerKid = {imgName: "soccerKid", imgSrc: null, posX: 100, posY: 300,
-    movX: 320, movY: 25, scale: 0.5, scaleTo: 0.7,
-    duration: 2, easing: "EaseOut", sound: null, callback: function() {
+
+subjects.soccerKid = {imgName: "soccerKid", imgSrc: null, 
+    posX: 100, posY: 300,movX: 320, movY: 25, 
+    scale: 0.5, scaleTo: 0.7, duration: 2, easing: "EaseOut", 
+    sound: null, callback: function() {
     }};
+
 subjects.farmKid = {imgName: "farmKid", imgSrc: null, posX: 280, posY: 250,
     movX: 0, movY: 0, scale: 0.7, scaleTo: 0.8,
     duration: 2, easing: "Linear", sound: null, callback: function() {
@@ -162,10 +167,14 @@ extras.sandcastle = {imgName: "sandcastle", imgSrc: docUrl + "img/sandcastle.png
     movX: 0, movY: -60, scaleTo: 0.8, duration: 4, easing: "StrongEaseInOut", sound: "sandcastle", callback: function() {
         addBookEvent();
     }};
-extras.seagull1 = {imgName: "seagull1", imgSrc: docUrl + "img/seagull.png", posX: 600, posY: 300, scale: 0.1, rotation: 5,
-    movX: -80, movY: 50, scaleTo: 0.2, duration: 3, easing: "EaseInOut", sound: "seagull", callback: function() {
+
+extras.seagull1 = {imgName: "seagull1", imgSrc: docUrl + "img/seagull.png", 
+    posX: 600, posY: 300, scale: 0.1, rotation: 5,
+    movX: -80, movY: 50, scaleTo: 0.2, duration: 3, easing: "EaseInOut", 
+    sound: "seagull", callback: function() {
         addBookEvent();
     }};
+
 extras.seagull2 = {imgName: "seagull2", imgSrc: docUrl + "img/seagull.png", posX: 580, posY: 200, scale: 0.2, rotation: 15,
     movX: -100, movY: 50, scaleTo: 0.3, duration: 4, easing: "EaseInOut", sound: "seagull", callback: function() {
         addBookEvent();
@@ -253,9 +262,11 @@ var pages = {};
 pages.page = {animate: function() {
         animateMulti(null, null, null, false);
     }};
-//THE BOOK
 
-goingPlaces = {name: "Going Places", pages: {}, coverImg: docUrl + "img/going_places/going_places.png"};
+//THE BOOKS
+
+goingPlaces = {name: "Going Places", pages: {}, 
+    coverImg: docUrl + "img/going_places/going_places.png"};
 goingPlaces.pages.page0 = {name: "cover", animate: function(play) {
         animateMulti(null, null, null, play);
     }};
@@ -268,6 +279,7 @@ goingPlaces.pages.page2 = {name: "road", animate: function(play) {
 goingPlaces.pages.page3 = {name: "park", animate: function(play) {
         animateMulti("soccerKid", "soccerBall", null, play);
     }};
+
 goingPlaces.pages.page4 = {name: "bikeway", animate: function(play) {
         animateMulti("bikeKid", null, null, play);
     }};
@@ -277,9 +289,11 @@ goingPlaces.pages.page5 = {name: "beach1", animate: function(play) {
 goingPlaces.pages.page6 = {name: "beach2", animate: function(play) {
         animateMulti("sandKid", "sandcastle", null, play);
     }};
+
 goingPlaces.pages.page7 = {name: "farm1", animate: function(play) {
         animateMulti("farmKid", "sheep", "goat", play);
     }};
+
 goingPlaces.pages.page8 = {name: "farm2", animate: function(play) {
         animateMulti("farmKid", "duck", "chicken", play);
     }};
