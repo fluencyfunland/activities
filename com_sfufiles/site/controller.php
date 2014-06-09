@@ -7,10 +7,18 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
 
 /**
- * sfuFiles Component Controller
+ * sfuFiles Component Controller Class
+ * This class is used to return file names and delete files 
+ * in a user directory which is used by the Module: Simple File Load 
+ * Directory is specified in the Advanced options 
+ *  -  User name directories root path (currently "users_sfu") 
  */
 class SfuFilesController extends JController {
-
+    /* Class Function to delete an image from the user path sent as "image"
+     * in the post array
+     * images deleted for orignal image and thumb
+     * returns a string message of success or not
+     */
     public function deleteimage() {
 
         if (JRequest::getVar("image") !== "") {
@@ -27,6 +35,9 @@ class SfuFilesController extends JController {
         }
     }
 
+    /* Class Function to traverse the current user directory if found 
+     * returns the images found as a JSON array
+     */
     public function getimages() {
 
         $path = getPath();
@@ -38,21 +49,23 @@ class SfuFilesController extends JController {
         $images = array();
         foreach ($thumbs as $thumb) {
 
-            if (strpos($thumb, 'index.html') === false && strpos($thumb, 'sfuthumb') === false && strpos($thumb, '.') !== false) {
+            if (strpos($thumb, 'index.html') === false &&
+                    strpos($thumb, 'sfuthumb') === false &&
+                    strpos($thumb, '.') !== false) {
 
                 array_push($images, $thumb);
             }//end if
         }//end foreach
+        //send the files back as a json array
         $data["urlpath"] = $path;
         $data["images"] = $images;
         echo json_encode($data);
     }
-
-//end get Images
 }
 
-//end class
-//Get the image files and place in an array
+/* Function to traverse a path to find files
+ * returns an array fo files (in reverse order)
+ */
 function getFiles($path) {
 
     $files = array();
@@ -65,6 +78,9 @@ function getFiles($path) {
     return array_reverse($files);
 }
 
+/* Function to get the current user and the path to the user directory
+ * returns the path to the current user directory
+ */
 function getPath() {
 
     //get the current logged in user
