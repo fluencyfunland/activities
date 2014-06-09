@@ -5,11 +5,11 @@
 //globals
 var themes = {};
 var currentTheme = null;
-var currentObject = null;
+var currentItem = null;
 var flickrSets = {};
-var images = {};
-var tweens = {};
 var customPhotos = {};
+
+console.log("start");
 
 displayThemeMenu();
 
@@ -31,16 +31,18 @@ function displayThemeMenu() {
     }).done(function(result) {
         //loop through the names: display the navigation and add sprite images
         var themeNames = $.parseJSON(result);
+        
+        console.log(themeNames);
 
         themeNames["custom"] = "";
-        $.each(themeNames, function(themeName, objects) {
+        $.each(themeNames, function(themeName, items) {
         
         var imgSource = docUrl + "img/thumbs/" + themeName + ".png";
 
-            //create the theme object
+            //create the theme item
             themes[themeName] = {
                 name: themeName,
-                objects: {}
+                items: {}
             };
 
             $("#theme-menu").append($("<img>")
@@ -51,13 +53,13 @@ function displayThemeMenu() {
             themeName !== "custom" ? addSpriteStylesheet(themeName) : "";
             themeName !== "custom" ? createThemeBackground(themeName) : "";
 
-            $.each(objects, function(idx, object) {
-                themes[themeName].objects[object] = {};
+            $.each(items, function(idx, item) {
+                themes[themeName].items[item] = {};
             });
         });
 
         initThemeNavigation();
-        setObjectParams(themeNames);
+        setItemParams(themeNames);
         
     });//end ajax
 }
@@ -75,7 +77,7 @@ function initThemeNavigation() {
         $("#col1, #col2").addClass("loading");
 
         currentTheme = $(this).attr("alt");
-        currentObject = currentTheme;
+        currentItem = currentTheme;
 
         imgLayer.getChildren().hide();
         imgLayer.draw();
@@ -91,16 +93,16 @@ function initThemeNavigation() {
         $("#showTextMsg").hide();
         $("#theme-menu, #home").hide();
 
-        //if this is the first time selected, create the object backgrounds
+        //if this is the first time selected, create the item backgrounds
         if ($("#image-div").children("." + currentTheme).length === 0) {
-            createObjectBackgrounds();
+            createItemBackgrounds();
         }
 
         //for custom show page with the sets and navigation to each set
         if (currentTheme === "custom") {
             showCustomPage();
         } else {
-            //show background and object images 
+            //show background and item images 
             $("#" + currentTheme + "_bg").show();
             displayThemeSpriteImages();
         }
@@ -132,177 +134,180 @@ function createThemeBackground(theme) {
 }
 
 
-//function to init and assign object co-ords and scale
-function setObjectParams(themeNames) {
+//function to init and assign item co-ords and scale
+function setItemParams(themeNames) {
 
-    themes.beach.objects.beachball = {posX: 300, posY: 250, scale: 1, rotation: 10,
-        movX: 20, movY: 70, scaleTo: 1, duration: 2, easing: "BounceEaseOut"};
-    themes.beach.objects.bucket = {posX: 200, posY: 300, scale: 0.6, rotation: 10,
+    themes.beach.items.beachball = {
+        posX: 300, posY: 250, scale: 1, rotation: 10,
+        movX: 20, movY: 70, scaleTo: 1, duration: 2, 
+        easing: "BounceEaseOut"};
+    
+    themes.beach.items.bucket = {posX: 200, posY: 300, scale: 0.6, rotation: 10,
         movX: 0, movY: 0, scaleTo: 0.6, duration: 1, easing: "StrongEaseInOut"};
-    themes.beach.objects.crab = {posX: 300, posY: 300, scale: 0.9,
+    themes.beach.items.crab = {posX: 300, posY: 300, scale: 0.9,
         movX: 30, movY: 0, scaleTo: 0.9, duration: 1, easing: "EaseOut"};
-    themes.beach.objects.jellyfish = {posX: 300, posY: 100, scale: 1,
+    themes.beach.items.jellyfish = {posX: 300, posY: 100, scale: 1,
         movX: 30, movY: -40, scaleTo: 1, duration: 2, easing: "EaseInOut"};
-    themes.beach.objects.lifeguard = {posX: 300, posY: 200, scale: 1.1,
+    themes.beach.items.lifeguard = {posX: 300, posY: 200, scale: 1.1,
         movX: -20, movY: 0, scaleTo: 1.1, duration: 2, easing: "Linear"};
-    themes.beach.objects.sandcastle = {posX: 350, posY: 500, scale: 0.1,
+    themes.beach.items.sandcastle = {posX: 350, posY: 500, scale: 0.1,
         movX: 0, movY: -100, scaleTo: 0.9, duration: 4, easing: "StrongEaseInOut"};
-    themes.beach.objects.seagull = {posX: 200, posY: 100, scale: 0.7, rotation: 5,
+    themes.beach.items.seagull = {posX: 200, posY: 100, scale: 0.7, rotation: 5,
         movX: -100, movY: 50, scaleTo: 0.8, duration: 2, easing: "EaseInOut"};
-    themes.beach.objects.seashell = {posX: 400, posY: 280, scale: 0.4,
+    themes.beach.items.seashell = {posX: 400, posY: 280, scale: 0.4,
         movX: 0, movY: 20, scaleTo: 1.1, duration: 2, easing: "Linear"};
-    themes.beach.objects.towel = {posX: 100, posY: 350, scale: 0,
+    themes.beach.items.towel = {posX: 100, posY: 350, scale: 0,
         movX: 00, movY: 0, scaleTo: 1.2, duration: 1, easing: "StrongEaseInOut"};
-    themes.beach.objects.umbrella = {posX: 80, posY: -40, scale: 1,
+    themes.beach.items.umbrella = {posX: 80, posY: -40, scale: 1,
         movX: 10, movY: 20, scaleTo: 1, duration: 1, easing: "StrongEaseInOut"};
 
-    themes.home.objects.backyard = {posX: 100, posY: 0, scale: 0.88,
+    themes.home.items.backyard = {posX: 100, posY: 0, scale: 0.88,
         movX: 0, movY: 0, scaleTo: 0.9, duration: 1, easing: "Linear"};
-    themes.home.objects.bath = {posX: 100, posY: 200, scale: .99,
+    themes.home.items.bath = {posX: 100, posY: 200, scale: .99,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.bed = {posX: 80, posY: 250, scale: .99,
+    themes.home.items.bed = {posX: 80, posY: 250, scale: .99,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.fridge = {posX: 200, posY: 20, scale: 0.97,
+    themes.home.items.fridge = {posX: 200, posY: 20, scale: 0.97,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.lounge = {posX: 190, posY: 170, scale: 0.99,
+    themes.home.items.lounge = {posX: 190, posY: 170, scale: 0.99,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.oven = {posX: 100, posY: 200, scale: 0.9,
+    themes.home.items.oven = {posX: 100, posY: 200, scale: 0.9,
         movX: 0, movY: 0, scaleTo: 0.92, duration: 1, easing: "Linear"};
-    themes.home.objects.parents = {posX: 270, posY: 250, scale: 0.9,
+    themes.home.items.parents = {posX: 270, posY: 250, scale: 0.9,
         movX: 0, movY: 20, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.toilet = {posX: 280, posY: 180, scale: 0.99,
+    themes.home.items.toilet = {posX: 280, posY: 180, scale: 0.99,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.tv = {posX: 280, posY: 60, scale: .99,
+    themes.home.items.tv = {posX: 280, posY: 60, scale: .99,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.home.objects.washing_machine = {posX: 400, posY: 160, scale: 0.98,
+    themes.home.items.washing_machine = {posX: 400, posY: 160, scale: 0.98,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
 
-    themes.farm.objects.chicken = {posX: 675, posY: 420, scale: 0.8,
+    themes.farm.items.chicken = {posX: 675, posY: 420, scale: 0.8,
         movX: -20, movY: 0, scaleTo: 0.8, duration: 1, easing: "EaseInOut"};
-    themes.farm.objects.cow = {posX: 350, posY: 350, scale: 1,
+    themes.farm.items.cow = {posX: 350, posY: 350, scale: 1,
         movX: -20, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.farm.objects.duck = {posX: 540, posY: 380, scale: 1,
+    themes.farm.items.duck = {posX: 540, posY: 380, scale: 1,
         movX: -20, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.farm.objects.farmer = {posX: 600, posY: 380, scale: 0.97,
+    themes.farm.items.farmer = {posX: 600, posY: 380, scale: 0.97,
         movX: 0, movY: 5, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.farm.objects.horse = {posX: 260, posY: 150, scale: 1,
+    themes.farm.items.horse = {posX: 260, posY: 150, scale: 1,
         movX: -20, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.farm.objects.goat = {posX: 380, posY: 340, scale: 1,
+    themes.farm.items.goat = {posX: 380, posY: 340, scale: 1,
         movX: 20, movY: 0, scaleTo: 1, duration: 1, easing: "EaseInOut"};
-    themes.farm.objects.pig = {posX: 350, posY: 380, scale: 1,
+    themes.farm.items.pig = {posX: 350, posY: 380, scale: 1,
         movX: 20, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.farm.objects.scarecrow = {posX: 300, posY: 280, scale: 1,
+    themes.farm.items.scarecrow = {posX: 300, posY: 280, scale: 1,
         movX: 0, movY: 0, scaleTo: 1.2, duration: 1, easing: "EaseInOut"};
-    themes.farm.objects.sheep = {posX: 350, posY: 370, scale: 1,
+    themes.farm.items.sheep = {posX: 350, posY: 370, scale: 1,
         movX: -20, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.farm.objects.tractor = {posX: 230, posY: 250, scale: 0.98,
+    themes.farm.items.tractor = {posX: 230, posY: 250, scale: 0.98,
         movX: -20, movY: 10, scaleTo: 1, duration: 1, easing: "Linear"};
 
-    themes.pets.objects.bird = {posX: 180, posY: 390, scale: 1,
+    themes.pets.items.bird = {posX: 180, posY: 390, scale: 1,
         movX: 20, movY: 0, scaleTo: 1, duration: 1, easing: "EaseInOut"};
-    themes.pets.objects.goldfish = {posX: 280, posY: 280, scale: 1,
+    themes.pets.items.goldfish = {posX: 280, posY: 280, scale: 1,
         movX: -30, movY: 0, scaleTo: 1, duration: 2, easing: "Linear"};
-    themes.pets.objects.guineapig = {posX: 290, posY: 200, scale: 1,
+    themes.pets.items.guineapig = {posX: 290, posY: 200, scale: 1,
         movX: -20, movY: 0, scaleTo: 1, duration: 4, easing: "Linear"};
-    themes.pets.objects.hermitcrab = {posX: 310, posY: 290, scale: 1,
+    themes.pets.items.hermitcrab = {posX: 310, posY: 290, scale: 1,
         movX: 20, movY: 0, scaleTo: 1, duration: 4, easing: "Linear"};
-    themes.pets.objects.kitten = {posX: 430, posY: 370, scale: 0.95,
+    themes.pets.items.kitten = {posX: 430, posY: 370, scale: 0.95,
         movX: 0, movY: 0, scaleTo: 1, duration: 4, easing: "Linear"};
-    themes.pets.objects.lamb = {posX: 430, posY: 270, scale: 1,
+    themes.pets.items.lamb = {posX: 430, posY: 270, scale: 1,
         movX: 20, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.pets.objects.mouse = {posX: 420, posY: 220, scale: 1,
+    themes.pets.items.mouse = {posX: 420, posY: 220, scale: 1,
         movX: 0, movY: -20, scaleTo: 1, duration: 4, easing: "Linear"};
-    themes.pets.objects.puppy = {posX: 385, posY: 280, scale: 1, rotation: -3,
+    themes.pets.items.puppy = {posX: 385, posY: 280, scale: 1, rotation: -3,
         movX: -5, movY: 10, scaleTo: 1, duration: 1, easing: "EaseInOut"};
-    themes.pets.objects.rabbit = {posX: 290, posY: 270, scale: 1,
+    themes.pets.items.rabbit = {posX: 290, posY: 270, scale: 1,
         movX: 10, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.pets.objects.turtle = {posX: 390, posY: 251, scale: 1, rotation: 3,
+    themes.pets.items.turtle = {posX: 390, posY: 251, scale: 1, rotation: 3,
         movX: 10, movY: 0, scaleTo: 1, duration: 2, easing: "Linear"};
 
-    themes.picnic.objects.ants = {posX: 180, posY: 320, scale: 1,
+    themes.picnic.items.ants = {posX: 180, posY: 320, scale: 1,
         movX: 50, movY: 0, scaleTo: 1, duration: 2, easing: "EaseInOut"};
-    themes.picnic.objects.bbq = {posX: 180, posY: 320, scale: 0,
+    themes.picnic.items.bbq = {posX: 180, posY: 320, scale: 0,
         movX: 50, movY: 0, scaleTo: 0, duration: 2, easing: "EaseInOut"};
-    themes.picnic.objects.boomerang = {posX: 270, posY: 150, scale: 1, rotation: 360,
+    themes.picnic.items.boomerang = {posX: 270, posY: 150, scale: 1, rotation: 360,
         movX: -200, movY: 0, scaleTo: 0.8, duration: 2, easing: "Linear"};
-    themes.picnic.objects.park_bench = {posX: 80, posY: 30, scale: 0.9,
+    themes.picnic.items.park_bench = {posX: 80, posY: 30, scale: 0.9,
         movX: 0, movY: 0, scaleTo: 0.9, duration: 1, easing: "Linear"};
-    themes.picnic.objects.picnic_basket = {posX: 120, posY: 320, scale: 1,
+    themes.picnic.items.picnic_basket = {posX: 120, posY: 320, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 4, easing: "Linear"};
-    themes.picnic.objects.picnic_blanket = {posX: 240, posY: 260, scale: 1,
+    themes.picnic.items.picnic_blanket = {posX: 240, posY: 260, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 4, easing: "Linear"};
-    themes.picnic.objects.tennisball = {posX: 380, posY: 210, scale: 1,rotation: 90,
+    themes.picnic.items.tennisball = {posX: 380, posY: 210, scale: 1,rotation: 90,
         movX: -130, movY: 20, scaleTo: 1, duration: 2, easing: "Linear"};
     
-    themes.playground.objects.slide = {posX: 200, posY: 50, scale: 1,
+    themes.playground.items.slide = {posX: 200, posY: 50, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.playground.objects.swings = {posX: 150, posY: 130, scale: 1,
+    themes.playground.items.swings = {posX: 150, posY: 130, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.playground.objects.trampoline = {posX: 230, posY: 120, scale: 1,
+    themes.playground.items.trampoline = {posX: 230, posY: 120, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.playground.objects.tunnel = {posX: 260, posY: 150, scale: 1,
-        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-
-    themes.school.objects.blackboard = {posX: 240, posY: 80, scale: 1,
-        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.school.objects.lunchbox = {posX: 320, posY: 170, scale: 1,
-        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.school.objects.pencils = {posX: 530, posY: 400, scale: 1,
-        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.school.objects.singing = {posX: 230, posY: 200, scale: 1,
+    themes.playground.items.tunnel = {posX: 260, posY: 150, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
 
-    themes.shops.objects.icecream_truck = {posX: 40, posY: 180, scale: 1,rotation: -4,
+    themes.school.items.blackboard = {posX: 240, posY: 80, scale: 1,
+        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
+    themes.school.items.lunchbox = {posX: 320, posY: 170, scale: 1,
+        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
+    themes.school.items.pencils = {posX: 530, posY: 400, scale: 1,
+        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
+    themes.school.items.singing = {posX: 230, posY: 200, scale: 1,
+        movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
+
+    themes.shops.items.icecream_truck = {posX: 40, posY: 180, scale: 1,rotation: -4,
         movX: -200, movY: 100, scaleTo: 1, duration: 4, easing: "EaseIn"};
-    themes.shops.objects.money = {posX: 250, posY: 90, scale: 1.1,
+    themes.shops.items.money = {posX: 250, posY: 90, scale: 1.1,
         movX: 0, movY: 0, scaleTo: 1.1, duration: 1, easing: "Linear"};
-    themes.shops.objects.vegetables = {posX: 190, posY: 265, scale: 0,
+    themes.shops.items.vegetables = {posX: 190, posY: 265, scale: 0,
         movX: 0, movY: 0, scaleTo: 0, duration: 4, easing: "Linear"};
 
-    themes.sport.objects.basketball = {posX: 320, posY: 130, scale: 1,
+    themes.sport.items.basketball = {posX: 320, posY: 130, scale: 1,
         movX: 0, movY: -20, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.sport.objects.cricket = {posX: 200, posY: 290, scale: 1,
+    themes.sport.items.cricket = {posX: 200, posY: 290, scale: 1,
         movX: 0, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
-    themes.sport.objects.football = {posX: 500, posY: 500, scale: 0.5,rotation: 180,
+    themes.sport.items.football = {posX: 500, posY: 500, scale: 0.5,rotation: 180,
         movX: -100, movY: -440, scaleTo: 0.1, duration: 2, easing: "EaseInOut"};
-    themes.sport.objects.gymnastics = {posX: 280, posY: 120, scale: 1,
+    themes.sport.items.gymnastics = {posX: 280, posY: 120, scale: 1,
         movX: 10, movY: 0, scaleTo: 1, duration: 2, easing: "Linear"};
-    themes.sport.objects.netball = {posX: 300, posY: 100, scale: 1,
+    themes.sport.items.netball = {posX: 300, posY: 100, scale: 1,
         movX: 10, movY: -20, scaleTo: 1, duration: 1, easing: "EaseIn"};
-    themes.sport.objects.soccer = {posX: 230, posY: 250, scale: 1,
+    themes.sport.items.soccer = {posX: 230, posY: 250, scale: 1,
         movX: 10, movY: 10, scaleTo: 1.1, duration: 1, easing: "Linear"};
-    themes.sport.objects.tennis = {posX: 100, posY: 230, scale: 1,
+    themes.sport.items.tennis = {posX: 100, posY: 230, scale: 1,
         movX: 10, movY: 0, scaleTo: 1, duration: 1, easing: "Linear"};
 
-    themes.transport.objects.bicycle = {posX: 360, posY: 220, scale: 1, rotation: 5,
+    themes.transport.items.bicycle = {posX: 360, posY: 220, scale: 1, rotation: 5,
         movX: 55, movY: 15, scaleTo: 1, duration: 1, easing: "EaseOut"};
-    themes.transport.objects.bus = {posX: 380, posY: 270, scale: 1, rotation: -2,
+    themes.transport.items.bus = {posX: 380, posY: 270, scale: 1, rotation: -2,
         movX: -40, movY: 0, scaleTo: 1, duration: 2, easing: "Linear"};
-    themes.transport.objects.car = {posX: 50, posY: 90, scale: .4, rotation: -3,
+    themes.transport.items.car = {posX: 50, posY: 90, scale: .4, rotation: -3,
         movX: -40, movY: 30, scaleTo: .4, duration: 2, easing: "Linear"};
-    themes.transport.objects.motorcycle = {posX: 390, posY: 370, scale: 1,
+    themes.transport.items.motorcycle = {posX: 390, posY: 370, scale: 1,
         movX: -50, movY: 0, scaleTo: 1, duration: 2, easing: "EaseInOut"};
-    themes.transport.objects.plane = {posX: 40, posY: 170, scale: .4,rotation: 5,
+    themes.transport.items.plane = {posX: 40, posY: 170, scale: .4,rotation: 5,
         movX: 100, movY: 0, scaleTo: 1, duration: 2, easing: "Linear"};
-    themes.transport.objects.rocket = {posX: 100, posY: 380,rotation: -5,
+    themes.transport.items.rocket = {posX: 100, posY: 380,rotation: -5,
         movX: 700, movY: -230, scale: 1, scaleTo: 0, duration: 4, easing: "EaseOut", };
-    themes.transport.objects.scooter = {posX: 220, posY: 150, scale: 0.96,
+    themes.transport.items.scooter = {posX: 220, posY: 150, scale: 0.96,
         movX: -60, movY: 10, scaleTo: 1, duration: 2, easing: "EaseOut"};
-    themes.transport.objects.ship = {posX: 200, posY: 280, scale: 0.9, rotation: -5,
+    themes.transport.items.ship = {posX: 200, posY: 280, scale: 0.9, rotation: -5,
         movX: 80, movY: 0, scaleTo: 1, duration: 2, easing: "Linear"};
-    themes.transport.objects.train = {posX: 260, posY: 230, scale: 1.17,rotation: -2,
+    themes.transport.items.train = {posX: 260, posY: 230, scale: 1.17,rotation: -2,
         movX: -16, movY: 0, scaleTo: 1.24, duration: 1, easing: "Linear"};
-    themes.transport.objects.tram = {posX: 120, posY: 180, scale: 1.2,
+    themes.transport.items.tram = {posX: 120, posY: 180, scale: 1.2,
         movX: -150, movY: 0, scaleTo: 1.2, duration: 3, easing: "EaseOut"};
 
-    $.each(themeNames, function(themeName, objects) {
-        $.each(objects, function(idx, object) {
-            themes[themeName].objects[object].imgName = object;
-            themes[themeName].objects[object].imgSrc = docUrl + "themes/" + themeName
-                    + "/objects/" + object + ".png";
-            themes[themeName].objects[object].callback = function() {
+    $.each(themeNames, function(themeName, items) {
+        $.each(items, function(idx, item) {
+            themes[themeName].items[item].imgName = item;
+            themes[themeName].items[item].imgSrc = docUrl + "themes/" + themeName
+                    + "/items/" + item + ".png";
+            themes[themeName].items[item].callback = function() {
             };
-            drawImage(themes[themeName].objects[object]);
+            drawImage(themes[themeName].items[item]);
         });
     });
 }

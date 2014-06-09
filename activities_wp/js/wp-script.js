@@ -17,16 +17,16 @@ function initSpriteEvent() {
         txtLayer.removeChildren();
         txtLayer.draw();
 
-        currentObject = ($(this).attr("class")).split(" ")[0];
+        currentItem = ($(this).attr("class")).split(" ")[0];
         $("#container, .theme-bg").hide();
 
-        //show the  background and object
-        $("#" + currentObject + "_bg").show("500", function() {
+        //show the  background and item
+        $("#" + currentItem + "_bg").show("500", function() {
             imgLayer.getChildren().hide();
-            images[currentObject].show();
-            tweens[currentObject].reset();
-            tweens[currentObject].play();
-            $.ionSound.play(currentObject);
+            images[currentItem].show();
+            tweens[currentItem].reset();
+            tweens[currentItem].play();
+            $.ionSound.play(currentItem);
             $("#showTextMsg1").show();
             $("#container").show();
         });
@@ -71,20 +71,20 @@ function initBackNavigation() {
 }
 
 
-/** Create the html for each object with a theme, which is hidden until selected 
+/** Create the html for each item with a theme, which is hidden until selected 
  * @returns void
  */
-function createObjectBackgrounds() {
+function createItemBackgrounds() {
 
-    $.each(themes[currentTheme].objects, function(idx, object) {
+    $.each(themes[currentTheme].items, function(idx, item) {
 
-        var objectBg = docUrl + "themes/" + currentTheme + "/backgrounds/" + idx + "_bg.png";
+        var itemBg = docUrl + "themes/" + currentTheme + "/backgrounds/" + idx + "_bg.png";
 
-        //for each object - create an object background
+        //for each item - create an item background
         $("#image-div")
                 .append($("<img>")
                         .addClass("theme-bg " + currentTheme)
-                        .attr("src", objectBg)
+                        .attr("src", itemBg)
                         .attr("id", idx + "_bg")
                         .attr("alt", idx)
                         );
@@ -100,12 +100,12 @@ function displayThemeSpriteImages() {
 
     if (currentTheme !== "custom") {
 
-        var imageNames = themes[currentTheme].objects;
+        var imageNames = themes[currentTheme].items;
 
         var imageSounds = new Array();
         var numColumns = 2;
         var i = 0;
-        $.each(imageNames, function(imageName, object) {
+        $.each(imageNames, function(imageName, item) {
 
             if (i < getObjectSize(imageNames) / numColumns) {
                 $("#col1").append($("<div>").addClass(imageName).addClass("sprite nav"));
@@ -145,7 +145,7 @@ function initShowTextEvent() {
         var posX = $("#container").width() / 2;
         var posY = 100;
         var size = 70;
-        var message = currentObject;
+        var message = currentItem;
         drawText(posX, posY, size, message);
         $("#container").show();
     });
@@ -368,7 +368,7 @@ function initCustomThumbEvent() {
         event.stopPropagation();
         event.preventDefault();
 
-        currentObject = $(this).attr("alt");
+        currentItem = $(this).attr("alt");
         var imageId = $(this).attr("id");
         $("#container").hide();
         $("#showTextMsg2").show();

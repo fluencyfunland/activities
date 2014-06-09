@@ -6,7 +6,7 @@ $names = array();
 foreach ($folders as $folder) {
     $folder = str_replace("../themes/", "", $folder);
 
-    $images = getFiles("../themes/{$folder}/objects");
+    $images = getFiles("../themes/{$folder}/items");
     $imageNames = array();
 
     foreach ($images as $image) {
