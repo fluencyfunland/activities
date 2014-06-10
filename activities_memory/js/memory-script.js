@@ -15,17 +15,17 @@ var card2 = {//2nd selection
 
 
 
-// object to store the packs data
+// item to store the packs data
 var packs = {};
 packs.currentPack = {
-    name: null,//(string) name of the pack
-    imgSrc: null,//(string) url of the pack back image
+    name: null, //(string) name of the pack
+    imgSrc: null, //(string) url of the pack back image
     numImgs: null, //number of card images in the pack
-    images: null, //an object containing the card images
-    background: null,//background image src to show at on completion
-    sounds: [],//the sound to play on completion
-    color: null,//the color of the pack backgound
-    object: null,//the name of animated object for the completion
+    images: null, //an item containing the card images
+    background: null, //background image src to show at on completion
+    sounds: [], //the sound to play on completion
+    color: null, //the color of the pack backgound
+    item: null, //the name of animated item for the completion
 };
 
 packs.currentPack.objCoords = {x: null, y: null};
@@ -34,15 +34,15 @@ var cards = {}; //stores the positions of each card in the layout
 var positions = []; //absolute positions for the cards on the layout (unchanged)
 var shuffledPositions = []; //the copied array with the shuffled positions
 
-var animals = {imgName: "animals", imgSrc: docUrl + "objects/animals.png", posX: 1000, posY: 400,
+var animals = {imgName: "animals", imgSrc: docUrl + "items/animals.png", posX: 1000, posY: 400,
     movX: -100, movY: 0, scale: 1, scaleTo: 1,
     duration: 4, easing: "Linear", callback: function() {
     }};
-var food = {imgName: "food", imgSrc: docUrl + "objects/food.png", posX: 0, posY: 320,
-    movX: 500, movY: 20, scale: 1, scaleTo: 1,
+var food = {imgName: "food", imgSrc: docUrl + "items/food.png",
+    posX: 0, posY: 320, movX: 500, movY: 20, scale: 1, scaleTo: 1,
     duration: 4, easing: "EaseOut", callback: function() {
     }};
-var transport = {imgName: "transport", imgSrc: docUrl + "objects/transport.png", posX: 200, posY: 380,
+var transport = {imgName: "transport", imgSrc: docUrl + "items/transport.png", posX: 200, posY: 380,
     movX: 700, movY: -230, scale: 1, scaleTo: 0,
     duration: 4, easing: "EaseOut", callback: function() {
     }};
@@ -193,7 +193,7 @@ function initCards() {
 }
 
 /**Function: copies the original positions array shuffles the coords
- * assigns the shuffled coords back to the cards object and assigns the css
+ * assigns the shuffled coords back to the cards item and assigns the css
  * @returns void
  */
 function shuffleCards() {
@@ -322,10 +322,10 @@ function getPacks() {
 
         var jsonObj = $.parseJSON(result);
 
-        //assign the positions to the global object
+        //assign the positions to the global item
         positions = jsonObj.positions;
 
-        /*for each pack, place the packs data in the defined packs object,
+        /*for each pack, place the packs data in the defined packs item,
          and create the menu items */
         var jsonPacks = jsonObj.packs;
         var i = 0;
@@ -333,7 +333,7 @@ function getPacks() {
 
             var packImage = new Image();
             packImage = docUrl + "img/" + idx + ".png";
-            var objectImage = docUrl + "objects/" + idx + ".png";
+            var itemImage = docUrl + "items/" + idx + ".png";
             var background = docUrl + "img/" + idx + "_bg.png";
 
             packs[idx] = {};
@@ -344,8 +344,8 @@ function getPacks() {
             packs[idx].background = background;
             packs[idx].sounds = [idx];
             packs[idx].color = packColors[i];
-            packs[idx].object = objectImage;
-            
+            packs[idx].item = itemImage;
+
             console.log(packs[idx].coords);
 
             //draw and save the images and animations
@@ -399,7 +399,7 @@ function createCardLayout() {
                                 .attr("src", imageSrc)
                                 ));
 
-        //assign the positions to the card object, so the cards can be found
+        //assign the positions to the card item, so the cards can be found
         cards[idx].x = shuffledPositions[i].x;
         cards[idx].y = shuffledPositions[i].y;
         i++;
