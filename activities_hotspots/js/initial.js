@@ -3,8 +3,8 @@
 var hotspot = {
     name: null,//(string)the name of the pack
     path: null,//(string) the url path to the pack directory
-    objects: {},//the objects to be displayed on the canvas
-    positions: []//(array of floats) coords on the canvas for displaying objects
+    items: {},//the items to be displayed on the canvas
+    positions: []//(array of floats) coords on the canvas for displaying items
 };
 
 var farm = {name: "farm", path: docUrl + "img/farm/"};
@@ -22,7 +22,7 @@ farm.positions = [
     {posX: 700, posY: 300}
 ];
 
-farm.objects = {
+farm.items = {
     bird: {name: "bird", picAdj: 0.3},
     farmer: {name: "farmer", picAdj: 1},
     cow: {name: "cow", picAdj: 0.8},
@@ -46,7 +46,7 @@ park.positions = [
     {posX: 500, posY: 500}
 ];
 
-park.objects = {
+park.items = {
     ball: {name: "ball", picAdj: 1.1},
     bicycle: {name: "bicycle", picAdj: 1.3},
     dog: {name: "dog", picAdj: 1.1},
@@ -60,16 +60,16 @@ park.objects = {
 
 getPacks();
 
-function addObjParams(objects) {
-    $.each(objects, function(objName, object) {
+function addObjParams(items) {
+    $.each(items, function(objName, item) {
 
-        object.imgName = objName;
-        object.imgSrc = hotspot.path + objName + ".png";
-        object.scale = 0.1;
-        object.scaleTo = 1;
-        object.duration = 0.5;
-        object.easing = "Linear";
-        object.callback = function() {
+        item.imgName = objName;
+        item.imgSrc = hotspot.path + objName + ".png";
+        item.scale = 0.1;
+        item.scaleTo = 1;
+        item.duration = 0.5;
+        item.easing = "Linear";
+        item.callback = function() {
             tweenCallback(tweens[objName], objName);
         };
     });
@@ -129,12 +129,12 @@ function initPageNavigation() {
         var theme = $(this).next().html();
         hotspot = eval(theme);
 
-        //show the selected background, objects, and init the large images and sounds
+        //show the selected background, items, and init the large images and sounds
         $("#" + hotspot.name).show();
         $("#dark-bg").fadeIn(2000);
 
-        addObjParams(farm.objects);
-        addObjParams(park.objects);
+        addObjParams(farm.items);
+        addObjParams(park.items);
         initPositions();
         drawObjects();
         createImages();
@@ -191,49 +191,51 @@ function initPositions() {
 
     shuffle(hotspot.positions);
     var i = 0;
-    $.each(hotspot.objects, function(idx, object) {
+    $.each(hotspot.items, function(idx, item) {
         if (idx !== "swings" && idx !== "slide" && idx !== "fountain") {
-            object.posX = hotspot.positions[i].posX;
-            object.posY = hotspot.positions[i].posY;
+            item.posX = hotspot.positions[i].posX;
+            item.posY = hotspot.positions[i].posY;
         }
         i++;
     });
 }
 
 function drawObjects() {
+    
+    console.log("drawing");
 
-    //remove previous objects
-    $("#hotspots-layout .objects").remove();
+    //remove previous items
+    $("#hotspots-layout .items").remove();
 
-    $.each(hotspot.objects, function(idx, object) {
+    $.each(hotspot.items, function(idx, item) {
 
-        //adjust the image height so the objects look realistic
-        var divHt = 150 * object.picAdj;
-        var divWd = 150 * object.picAdj;
+        //adjust the image height so the items look realistic
+        var divHt = 150 * item.picAdj;
+        var divWd = 150 * item.picAdj;
 
         //adjust the perspective size according to the y coord
-        var divHt = Math.round(divHt * object.posY / 680 * 1.5);
-        var divWd = Math.round(divWd * object.posY / 680 * 1.5);
+        var divHt = Math.round(divHt * item.posY / 680 * 1.5);
+        var divWd = Math.round(divWd * item.posY / 680 * 1.5);
 
         //adjust coords for smaller dimensions than original div
-        var x = object.posX + (150 - divWd);
-        var y = object.posY + (150 - divHt);
+        var x = item.posX + (150 - divWd);
+        var y = item.posY + (150 - divHt);
         var zIndex = Math.round(y);
 
         $("#hotspots-layout")
-                .append($("<div>").addClass("objects")
+                .append($("<div>").addClass("items")
                 .css({height: divHt, width: divWd})
-                .attr("id", object.name)
+                .attr("id", item.name)
                 .css({left: x, top: y})
                 .css("zIndex", zIndex)
                 .append($("<img>")
-                .attr("src", hotspot.path + object.name + "_s.png")
+                .attr("src", hotspot.path + item.name + "_s.png")
                 .addClass("objImage")
-                .attr("id", object.name + "_s"))
+                .attr("id", item.name + "_s"))
                 .append($("<img>")
-                .attr("src", hotspot.path + object.name + "_g.png")
+                .attr("src", hotspot.path + item.name + "_g.png")
                 .addClass("objGlow")
-                .attr("id", object.name + "_g"))
+                .attr("id", item.name + "_g"))
                 );
     });
 }

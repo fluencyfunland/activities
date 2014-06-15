@@ -9,7 +9,7 @@ $activity->writeHtmlTopSection($cssLocalFiles);
 
 <div id="jigsaw-menu">
     <?php $activity->writeHomeBtnLink(); ?>
-    <div id="puzzle">
+    <div class="puzzle">
         <p>6 piece puzzles</p>
     </div>
     <?php
@@ -18,7 +18,7 @@ $activity->writeHtmlTopSection($cssLocalFiles);
     $activity->writeLocalPngImg("jig3", "nav jig", "jig3/jig3", "Jigswaw Puzzle 3");
     ?>
 
-    <div id="puzzle">
+    <div class="puzzle">
         <p>9 piece puzzles</p>
     </div>
     <?php

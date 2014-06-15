@@ -267,6 +267,7 @@ pages.page = {animate: function() {
 
 goingPlaces = {name: "Going Places", pages: {}, 
     coverImg: docUrl + "img/going_places/going_places.png"};
+
 goingPlaces.pages.page0 = {name: "cover", animate: function(play) {
         animateMulti(null, null, null, play);
     }};
@@ -321,7 +322,9 @@ goingPlaces.pages.page10.text = "But sometimes it was just good to stay home and
 goingPlaces.pages.page11.text = "THE END";
 
 
-crazyDreams = {name: "Crazy Dreams", pages: {}, coverImg: docUrl + "img/crazy_dreams/crazy_dreams.png"};
+crazyDreams = {name: "Crazy Dreams", pages: {}, 
+    coverImg: docUrl + "img/crazy_dreams/crazy_dreams.png"};
+
 crazyDreams.pages.page0 = {name: "cover", animate: function(play) {
         animateMulti(null, null, null, play);
     }};

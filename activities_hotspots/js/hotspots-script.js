@@ -7,8 +7,8 @@ initLayers();
 
 
 function createImages() {
-    $.each(hotspot.objects, function(idx, object) {
-        drawImage(object);
+    $.each(hotspot.items, function(idx, item) {
+        drawImage(item);
     });
 }
 
@@ -19,7 +19,7 @@ function initObjects() {
     $(".objImage").show();
 
     //on mouseover show the glowing image
-    $(".objects").on("mouseenter", function(event) {
+    $(".items").on("mouseenter", function(event) {
         event.stopPropagation();
         event.preventDefault();
         var image1 = $(this).find("img:eq(0)");
@@ -28,7 +28,7 @@ function initObjects() {
         image2.show();
     });
     //when leaving, go back to the normal image
-    $(".objects").on("mouseleave", function(event) {
+    $(".items").on("mouseleave", function(event) {
         event.stopPropagation();
         event.preventDefault();
         var image1 = $(this).find("img:eq(0)");
@@ -38,15 +38,15 @@ function initObjects() {
     });
 
     //on click or touch, hide the small image and call the animation to enlarge
-    $(".objects").on("mousedown touchstart", function(event) {
+    $(".items").on("mousedown touchstart", function(event) {
         event.stopPropagation();
         event.preventDefault();
         //stop further selection
-        $(".objects").unbind("mousedown touchstart");
+        $(".items").unbind("mousedown touchstart");
         //show the image canvas
         $("#container").show();
 
-        var objectName = $(this).attr("id");
+        var itemName = $(this).attr("id");
 
         $(this).hide();
 
@@ -58,8 +58,8 @@ function initObjects() {
         });
 
         //play tween
-        images[objectName].show();
-        tweens[objectName].play();
+        images[itemName].show();
+        tweens[itemName].play();
     });
 }
 
@@ -68,8 +68,8 @@ function initSounds() {
 
     //create the sounds array 
     var sounds = [];
-    $.each(hotspot.objects, function(idx, object) {
-        sounds.push(object.name);
+    $.each(hotspot.items, function(idx, item) {
+        sounds.push(item.name);
     });
 
     $.ionSound({
@@ -80,13 +80,10 @@ function initSounds() {
     });
 }
 
-function tweenCallback(tween, objectName) {
-    //show text for the object
-    drawText(512, 20, 60, objectName);
-    $.ionSound.play(objectName);
-
-    //show red x for closing
-
+function tweenCallback(tween, itemName) {
+    //show text for the item
+    drawText(512, 20, 60, itemName);
+    $.ionSound.play(itemName);
 
     //initiate event to remove large image on click
     $("#container").on("mousedown touchstart", function(event) {
@@ -96,7 +93,7 @@ function tweenCallback(tween, objectName) {
         tween.reset();
         imgLayer.draw();
         txtLayer.draw();
-        $(".objects").show();
+        $(".items").show();
         initObjects();
         $("#container").hide();
         $("#hotspots-layout").css({opacity: "1.0"});

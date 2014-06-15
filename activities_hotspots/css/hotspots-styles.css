@@ -57,19 +57,20 @@
     height: 680px;
     text-align: center;
     position: relative;
+    display: none;
 }
-.objects {
+.items {
     position: absolute;
     height: 150px;
     width: 150px;
 }
-.objects img {
+.items img {
     height: 100%;
 }
 .objGlow {
     display: none;
 }
-.objects:hover {
+.items:hover {
     cursor: pointer;
 }
 

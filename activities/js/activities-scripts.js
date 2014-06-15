@@ -2,13 +2,13 @@
 /* Global functions used by activities*/
 
 //GLOBALS
-var imgLayer = null;
-var txtLayer = null;
-var images = {};
-var tweens = {};
+var imgLayer = null; //the layer to draw the images
+var txtLayer = null; //the layer to write the text
+var images = {}; //object to store the images created in drawImage()
+var tweens = {};//object to store the tweens created in createTween()
 
 //Template of the object passed to the drawImage and createTween functions
-var object = {
+var itemObj = {
     imgName: null, //(string) the name of the image
     imgSrc: null, //(string) the url src of the image
     posX: null, //(float) the starting x coordinate 
@@ -87,51 +87,51 @@ function drawText(posX, posY, size, message) {
 
 //Draws the image on the image layer, which is stored in the images array,
 //then used by createTween function
-//parameter: the object (described above) 
-function drawImage(object) {
+//parameter: the itemObj (described above) 
+function drawImage(itemObj) {
 
     var imageObj = new Image();
-    imageObj.src = object.imgSrc;
+    imageObj.src = itemObj.imgSrc;
     imageObj.onload = function() {
         var image = new Kinetic.Image({
-            x: object.posX,
-            y: object.posY,
-            scaleX: typeof (object.scale) === "undefined" ? 0 : object.scale,
-            scaleY: typeof (object.scale) === "undefined" ? 0 : object.scale,
+            x: itemObj.posX,
+            y: itemObj.posY,
+            scaleX: typeof (itemObj.scale) === "undefined" ? 0 : itemObj.scale,
+            scaleY: typeof (itemObj.scale) === "undefined" ? 0 : itemObj.scale,
             image: imageObj
         });
         image.hide();
         imgLayer.add(image);
         stage.add(imgLayer);
 
-        //add image to images object
-        images[object.imgName] = image;
-        createTween(image, object);
+        //add image to images itemObj
+        images[itemObj.imgName] = image;
+        createTween(image, itemObj);
     };
 }
 
 //Creates the tween on the image layer, which is stored in the tweens array
-//parameter: image - the image created by drawImage; the object (described above) 
-function createTween(image, object) {
+//parameter: image - the image created by drawImage; the itemObj (described above) 
+function createTween(image, itemObj) {
 
-    var newPosX = typeof (object.movX) === "undefined" ? 280 : image.getX() + object.movX;
-    var newPosY = typeof (object.movY) === "undefined" ? 50 : image.getY() + object.movY;
+    var newPosX = typeof (itemObj.movX) === "undefined" ? 280 : image.getX() + itemObj.movX;
+    var newPosY = typeof (itemObj.movY) === "undefined" ? 50 : image.getY() + itemObj.movY;
 
     var tween = new Kinetic.Tween({
         node: image,
         force3D: true,
-        rotation: typeof (object.rotation) === "undefined" ? 0 : object.rotation,
-        duration: object.duration,
-        easing: Kinetic.Easings[object.easing],
+        rotation: typeof (itemObj.rotation) === "undefined" ? 0 : itemObj.rotation,
+        duration: itemObj.duration,
+        easing: Kinetic.Easings[itemObj.easing],
         x: newPosX,
         y: newPosY,
-        scaleX: typeof (object.scaleTo) === "undefined" ? 0 : object.scaleTo,
-        scaleY: typeof (object.scaleTo) === "undefined" ? 0 : object.scaleTo,
+        scaleX: typeof (itemObj.scaleTo) === "undefined" ? 0 : itemObj.scaleTo,
+        scaleY: typeof (itemObj.scaleTo) === "undefined" ? 0 : itemObj.scaleTo,
         onFinish: function() {
-            object.callback();
+            itemObj.callback();
         }
     });
 
-    //add tween to tweens object
-    tweens[object.imgName] = tween;
+    //add tween to tweens itemObj
+    tweens[itemObj.imgName] = tween;
 }

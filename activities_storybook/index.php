@@ -1,7 +1,7 @@
 <?php
-$urlString = defined('_JEXEC') ? "templates/activities/include/activity.php" : "../activities/include/activity.php";
+$urlString = defined('_JEXEC') ? "templates/activities/include/activity.php" : 
+        "../activities/include/activity.php";
 require($urlString);
-
 $activity = new Activity("activities_storybook", "Storybook");
 
 $activity1 = "activities_storybook";

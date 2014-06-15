@@ -30,7 +30,9 @@ var jigsaw = {
 };
 
 //the data for the jigsaws
-var jig1 = {name: "jig1", numPieces: 6, numCols: 3, numRows: 2, widthImg: 200, heightImg: 236, sounds: ["sheep"]};
+var jig1 = {name: "jig1", numPieces: 6, numCols: 3, numRows: 2, 
+    widthImg: 200, heightImg: 236, sounds: ["sheep"]};
+
 var jig2 = {name: "jig2", numPieces: 6, numCols: 3, numRows: 2, widthImg: 200, heightImg: 236, sounds: ["bus"]};
 var jig3 = {name: "jig3", numPieces: 6, numCols: 3, numRows: 2, widthImg: 200, heightImg: 236, sounds: ["bed"]};
 var jig4 = {name: "jig4", numPieces: 9, numCols: 3, numRows: 3, widthImg: 200, heightImg: 158, sounds: ["seagull"]};

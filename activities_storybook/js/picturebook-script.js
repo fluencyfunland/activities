@@ -29,20 +29,17 @@ function animate(anim, play) {
 }
 
 function animateMulti(anim1, anim2, anim3, play) {
-    //show the stage
     $("#container").show();
-    //call the first animation
-    animate(anim1, play);
-    //define the concurrent animation (if exists)
-    if (anim2 !== null) {
+    animate(anim1, play);//call the first animation
+    
+    if (anim2 !== null) {//if exists, then define
         function animate2(anim) {
             animate(anim, play);
         }
         images[anim2].moveToTop();
         animate2(anim2, play);
     }
-    //define the concurrent animation (if exists)
-    if (anim3 !== null) {
+    if (anim3 !== null) {//if exists, then define
         function animate3(anim, play) {
             animate(anim, play);
         }
