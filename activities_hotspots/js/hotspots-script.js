@@ -86,7 +86,7 @@ function tweenCallback(tween, itemName) {
     $.ionSound.play(itemName);
 
     //initiate event to remove large image on click
-    $("#container").on("mousedown touchstart", function(event) {
+    $("#container, #redx").on("mousedown touchstart", function(event) {
         event.stopPropagation();
         event.preventDefault();
         txtLayer.removeChildren();

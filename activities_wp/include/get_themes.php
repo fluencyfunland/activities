@@ -10,14 +10,15 @@ foreach ($folders as $folder) {
     $imageNames = array();
 
     foreach ($images as $image) {
-        array_push($imageNames, basename($image, ".png"));
+        
+       $imageName = basename($image, ".png");
+        if ($imageName !== "." && $imageName !== "..") {
+            array_push($imageNames, $imageName);
+        }
     }
     $names[$folder] = $imageNames;
 }
 echo json_encode($names);
-
-
-
 function getFiles($directory) {
     $dir = new RecursiveDirectoryIterator("{$directory}");
     $images = array();

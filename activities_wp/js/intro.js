@@ -9,8 +9,6 @@ var currentItem = null;
 var flickrSets = {};
 var customPhotos = {};
 
-console.log("start");
-
 displayThemeMenu();
 
 /** Collect the theme names by looking through the theme folders
@@ -31,8 +29,6 @@ function displayThemeMenu() {
     }).done(function(result) {
         //loop through the names: display the navigation and add sprite images
         var themeNames = $.parseJSON(result);
-        
-        console.log(themeNames);
 
         themeNames["custom"] = "";
         $.each(themeNames, function(themeName, items) {
@@ -91,7 +87,7 @@ function initThemeNavigation() {
 
         $("#container, #col1, #col2, #back").show();
         $("#showTextMsg").hide();
-        $("#theme-menu, #home").hide();
+        $("#theme-menu, #home, #act-home").hide();
 
         //if this is the first time selected, create the item backgrounds
         if ($("#image-div").children("." + currentTheme).length === 0) {
@@ -101,6 +97,7 @@ function initThemeNavigation() {
         //for custom show page with the sets and navigation to each set
         if (currentTheme === "custom") {
             showCustomPage();
+            $("#act-home").show();
         } else {
             //show background and item images 
             $("#" + currentTheme + "_bg").show();

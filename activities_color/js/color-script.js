@@ -187,7 +187,6 @@ function drawShape(shape) {
             drawing[shape].object.setStroke("white");
             layer6.add(drawing[shape].object);
         }
-
     }
 
     // add the layers to the stage
@@ -233,10 +232,6 @@ function initFindColor() {
         var c = this.getContext('2d');
         var p = c.getImageData(x, y, 1, 1).data;
         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-        //do something with the color
-        //console.log(hex);
-        //console.log(coord);
-        //drawColor = hex;
         $("#color-pick").css("background-color", hex);
         document.getElementById("color-canvas").style.cursor = "pointer";
     });
@@ -353,8 +348,8 @@ function checkFinish() {
 }
 
 function celebrate() {
-    addShapeBg();
     completed = true;
+    addShapeBg();
     document.body.style.cursor = "default";
 }
 

@@ -54,18 +54,18 @@ function initBackNavigation() {
             //if coming back from the custom menu to main menu
             if (!$("#custom-menu").is(":hidden")) {
 
-                $("#theme-menu, #image-div, #home").show();
+                $("#theme-menu, #image-div, #home, #act-home").show();
                 $("#custom-menu").hide();
             } else {
                 //if coming back from the the large images to the custom menu
                 $("#image-div").children(".customImage").remove();
-                $("#custom-menu").show();
-                $("#theme-menu").hide();
+                $("#custom-menu, #act-home").show();
+                $("#theme-menu, #home").hide();
                 $("#showTextMsg2").hide();
                 $("#back").show();
             }
         } else {
-            $("#theme-menu, #image-div, #home").show();
+            $("#theme-menu, #image-div, #home, #act-home").show();
         }
     });
 }
@@ -206,6 +206,7 @@ function displayCustomSets() {
 
     $("#custom-menu").addClass("loading");
     $("#flickr-instr").hide();
+    $("#showInstr").show();
     $("#custom-menu").removeClass("loading");
     $(".custom-item").remove();
 
@@ -273,7 +274,7 @@ function createCustomMenu(photos) {
     //initialise navigation to select the images
     $(".custom-item").on("mousedown touchstart", function() {
         //show the divs
-        $("#custom-menu").hide();
+        $("#custom-menu, #act-home").hide();
         $("#col1, #col2, #bg-canvas, #bg-canvas2, #back, #image-div").show();
 
         displayFlickrThumbs($(this).attr("id"));
